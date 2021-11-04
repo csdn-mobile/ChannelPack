@@ -2,7 +2,7 @@
 
 使用ApkTool实现的多渠道打包工具。
 
-## [点击下载JAR包](https://csdn-app.csdn.net/ChannelPack.jar)
+### [点击下载JAR包](https://csdn-app.csdn.net/ChannelPack.jar)
 
 ### 注意
 * 目前仅支持mac
