@@ -207,7 +207,7 @@ public class Pack {
             }
         }
         // 删除生成的临时文件夹
-        runCmd("rd " + unpackPath);
+        runCmd("rm -r -f " + unpackPath);
     }
 
     /**
