@@ -1,0 +1,3 @@
+rootProject.name = "ChannelPack"
+include ':app'
+include ':ChannelPack'
