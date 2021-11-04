@@ -10,7 +10,7 @@
 * 第一个版本仅支持v1签名
 
 ### 使用步骤
-**Step 1. 安装Apktool**
+#### Step 1. 安装Apktool
 
 [官方文档](https://ibotpeaches.github.io/Apktool/install)
 1. 按照步骤下载 **apktool.jar** 和 **apktool** 文件
