@@ -50,9 +50,9 @@ java -jar [ChannelPack_v1.X.X.jar路径] [原APK路径] [渠道txt路径] [keyst
 2. 需要生成渠道的APK
 3. Step3生成的渠道txt文件
 4. 签名需要的keystore文件
-4. keystore文件密码
-5. key的alias（别名）
-6. key的alias密码
+5. keystore文件密码
+6. key的alias（别名）
+7. key的alias密码
 
 ## 原理浅解
 1. Apktool是一个apk逆向工具，可以反编译apk、生成未签名apk。
