@@ -2,8 +2,6 @@
 
 使用ApkTool实现的多渠道打包工具。
 
-### [点击下载工具包](https://csdn-app.csdn.net/ChannelPackCore.zip)
-
 ## 注意
 * 目前仅支持mac
 
