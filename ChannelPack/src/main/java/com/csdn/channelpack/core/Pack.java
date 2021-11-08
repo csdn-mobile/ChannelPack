@@ -34,13 +34,17 @@ public class Pack {
     /**
      * 签名文件路径
      */
-    private final String keyFilePath;
+    private final String keystorePath;
+    /**
+     * 签名文件密码
+     */
+    private final String keystorePassword;
     /**
      * 签名文件别名
      */
     private final String keyAlias;
     /**
-     * 签名文件密码
+     * 签名文件别名密码
      */
     private final String keyPassword;
     /**
@@ -48,10 +52,11 @@ public class Pack {
      */
     private final ArrayList<String> channelList = new ArrayList<>();
 
-    public Pack(String apkFilePath, String channelFilePath, String keyFilePath, String keyAlias, String keyPassword) {// 构造函数接受参数
+    public Pack(String apkFilePath, String channelFilePath, String keystorePath, String keystorePassword, String keyAlias, String keyPassword) {// 构造函数接受参数
         this.apkFilePath = apkFilePath;
         this.channelFilePath = channelFilePath;
-        this.keyFilePath = keyFilePath;
+        this.keystorePath = keystorePath;
+        this.keystorePassword = keystorePassword;
         this.keyAlias = keyAlias;
         this.keyPassword = keyPassword;
 
@@ -193,12 +198,15 @@ public class Pack {
             System.out.println("|== Step 3.4 ==生成" + channel + "未签名渠道包成功==|");
 
             // 生成签名包
-            if (!TextUtils.isEmpty(keyFilePath) && !TextUtils.isEmpty(keyPassword)) {
+            if (!TextUtils.isEmpty(keystorePath) && !TextUtils.isEmpty(keystorePassword) && !TextUtils.isEmpty(keyAlias) && !TextUtils.isEmpty(keyPassword)) {
                 System.out.println("|== Step 3.5 ==签名" + channel + "渠道包==|");
                 String signApk = folderFile.getAbsolutePath() + "/" + apkFileName + "_" + channel + ".apk";
 
-                String cmdKey = String.format("jarsigner -verbose -keystore %s -signedjar %s %s %s -storepass %s",
-                        keyFilePath, signApk, unsignApk, keyAlias, keyPassword);
+                String cmdKey = String.format("apksigner sign --ks %s --ks-pass pass:%s --ks-key-alias %s --key-pass pass:%s --out %s %s",
+                        keystorePath, keyPassword, keyAlias, keyPassword, signApk, unsignApk);
+
+//                String cmdKey = String.format("jarsigner -verbose -keystore %s -signedjar %s %s %s -storepass %s",
+//                        keyFilePath, signApk, unsignApk, keyAlias, keyPassword);
                 runCmd(cmdKey);
                 System.out.println("|== Step 3.6 ==签名" + channel + "渠道包成功==|");
                 // 删除未签名的包

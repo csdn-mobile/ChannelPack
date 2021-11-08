@@ -10,18 +10,19 @@ public class ChannelPack {
         System.out.println("|================ChannelPack================|");
         System.out.println("|==@Start==|");
 
-        if (args == null || args.length != 5) {
+        if (args == null || args.length != 6) {
             // 传入4个参数
-            // apk路径、渠道文件路径、签名文件路径、签名密码
-            System.out.println("|==@Error==需要输入5个参数：apk路径、渠道文件路径、签名文件路径、签名别名、签名密码==|");
+            // apk路径、渠道文件路径、签名文件路径、签名密码、签名别名、签名别名密码
+            System.out.println("|==@Error==需要输入6个参数：apk路径、渠道文件路径、签名文件路径、签名密码、签名别名、签名别名密码==|");
             return;
         }
 
         String apkFilePath = args[0];
         String channelFilePath = args[1];
-        String keyFilePath = args[2];
-        String keyAlias = args[3];
-        String keyPassword = args[4];
+        String keystorePath = args[2];
+        String keystorePassword = args[3];
+        String keyAlias = args[4];
+        String keyPassword = args[5];
 
         if (TextUtils.isEmpty(apkFilePath)) {
             System.out.println("|==@Error==apk路径不能为空==|");
@@ -47,7 +48,7 @@ public class ChannelPack {
 
         System.out.println("|==@读取参数成功==|");
 
-        Pack pack = new Pack(apkFilePath, channelFilePath, keyFilePath, keyAlias, keyPassword);
+        Pack pack = new Pack(apkFilePath, channelFilePath, keystorePath, keystorePassword, keyAlias, keyPassword);
         pack.start();
     }
 }
