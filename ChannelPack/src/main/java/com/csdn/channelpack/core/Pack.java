@@ -1,5 +1,6 @@
 package com.csdn.channelpack.core;
 
+import com.csdn.channelpack.core.utils.FileUtils;
 import com.csdn.channelpack.core.utils.TextUtils;
 
 import java.io.BufferedReader;
@@ -27,6 +28,10 @@ public class Pack {
      * 反编译后的文件夹
      */
     private final String unpackPath;
+    /**
+     * 当前路径
+     */
+    private final String curPath;
     /**
      * 已签名APK存放地址
      */
@@ -61,9 +66,9 @@ public class Pack {
         this.keyPassword = keyPassword;
 
         File apkFile = new File(apkFilePath);
-        String curPath = apkFile.getParentFile().getAbsolutePath();
+        this.curPath = apkFile.getParentFile().getAbsolutePath();
         this.apkFileName = apkFile.getName().split("\\.")[0];
-        this.unpackPath = curPath + "/" + apkFileName;
+        this.unpackPath = curPath + "/" + apkFileName + "_temp";
         this.signFolderPath = curPath + "/[" + apkFileName + "]ChannelApk";
     }
 
@@ -146,6 +151,10 @@ public class Pack {
         File folderFile = new File(signFolderPath);
         // 清单文件
         File manifestFile = new File(unpackPath + "/AndroidManifest.xml");
+        // 临时清单文件
+        File tempManifestFile = new File(curPath + "/AndroidManifest.xml");
+        // 移动清单文件到临时清单文件
+        FileUtils.copyFile(manifestFile, tempManifestFile);
 
         // 遍历渠道，修改manifest文件，并生成未签名apk
         for (int i = 0; i < channelList.size(); i++) {
@@ -155,6 +164,13 @@ public class Pack {
             FileReader fr = null;
             FileWriter fw = null;
             try {
+                // 先删除被修改过的清单文件
+                if (manifestFile.exists()) {
+                    manifestFile.delete();
+                }
+                // 复制临时清单文件到文件夹内
+                FileUtils.copyFile(tempManifestFile, manifestFile);
+                // 开始修改清单文件
                 fr = new FileReader(manifestFile);
                 br = new BufferedReader(fr);
                 String line;
@@ -213,6 +229,10 @@ public class Pack {
                 File unApk = new File(unsignApk);
                 unApk.delete();
             }
+        }
+        // 删除临时清单文件
+        if (tempManifestFile.exists()) {
+            tempManifestFile.delete();
         }
         // 删除生成的临时文件夹
         runCmd("rm -r -f " + unpackPath);
