@@ -4,18 +4,19 @@
 
 ## 注意
 * 目前仅支持mac
+* 目前仅支持v1、v2混合签名
 
 ## 使用步骤
 ### Step 1. 下载集成工具包
-[点击下载工具包](https://csdn-app.csdn.net/ChannelPackCore.zip)
+[点击下载工具包](https://csdn-app.csdn.net/ChannelPackCore_v1.1.1.zip)
 1. 解压ChannelPackCore.zip
 2. 将/ChannelPackCore/bin文件夹中的文件全部拷贝到 /usr/local/bin 文件夹下
 3. 执行chmod +x赋予文件执行权限（复制以下代码到终端中执行）
 ```
- chmod +x /usr/local/bin/apktool.jar 
- chmod +x /usr/local/bin/apktool 
- chmod +x /usr/local/bin/apksigner.jar 
- chmod +x /usr/local/bin/apksigner 
+chmod +x /usr/local/bin/apktool.jar 
+chmod +x /usr/local/bin/apktool 
+chmod +x /usr/local/bin/apksigner.jar 
+chmod +x /usr/local/bin/apksigner 
 ```
 4. 终端输入apktool指令，可获取内容则为集成成功
 
@@ -63,5 +64,6 @@ java -jar [ChannelPack_v1.X.X.jar路径] [原APK路径] [渠道txt路径] [keyst
 ## 版本记录
 |版本号|更新内容|
 |---|---|
+|1.1.1|修复文件名截取错误BUG|
 |1.1.0|同时支持V1、V2签名|
 |1.0.0|First Version|

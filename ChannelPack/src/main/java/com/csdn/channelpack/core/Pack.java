@@ -67,7 +67,7 @@ public class Pack {
 
         File apkFile = new File(apkFilePath);
         this.curPath = apkFile.getParentFile().getAbsolutePath();
-        this.apkFileName = apkFile.getName().split("\\.")[0];
+        this.apkFileName = apkFile.getName().split("\\.apk")[0];
         this.unpackPath = curPath + "/" + apkFileName + "_temp";
         this.signFolderPath = curPath + "/[" + apkFileName + "]ChannelApk";
     }
